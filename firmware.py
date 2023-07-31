@@ -19,7 +19,7 @@ def set_motor_strength(pin, strength):
        strength is between 0 and 1.
        Attention: Use set_only_motor_strength instead
        to ensure that only one motor is on at a time."""
-    pin.duty_u16(int((2**15)*strength))
+    pin.duty_u16(int((2**16)*strength))
 
 def set_only_motor_strength(pin, strength):
     """Disables all motors, then sets the motor to a certain strength."""
@@ -34,7 +34,7 @@ def disable_all_motors():
 disable_all_motors()
 sleep(1)
 
-loop_duration = 0.001
+loop_duration = 0.01
 #t = 0
 #while True:
 #    strength = (math.sin(t*5)+1)/2
@@ -57,7 +57,8 @@ def best_motor(direction):
 
 t = 0
 while True:
-    direction = t # Also in multiples of Tau.
+    direction = t/2 # Also in multiples of Tau.
     best_motor_pin = best_motor(direction)
     set_only_motor_strength(best_motor_pin, 1)
     t += loop_duration
+    sleep(loop_duration)
