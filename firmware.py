@@ -1,5 +1,4 @@
-import board
-import pwmio
+from machine import Pin, PWM
 from time import sleep
 import time
 import math
@@ -12,19 +11,20 @@ import sys
 # Directions are multiples of Tau:
 # 0 is forward, 0.25 is right.
 motors = [
-    {"pin": board.GP0, "direction": 0.25},
-    {"pin": board.GP1, "direction": 0.75},
+    {"pin": 0, "direction": 0.25},
+    {"pin": 1, "direction": 0.75},
 ]
 
 for motor in motors:
-    motor["pwm"] = pwmio.PWMOut(motor["pin"], frequency=200)
+    motor["pwm"] = PWM(Pin(motor["pin"], Pin.OUT))
+    motor["pwm"].freq(200)
 
 def set_motor_strength(motor, strength):
     """Sets the motor to a certain strength.
        strength is between 0 and 1.
        Attention: Use set_only_motor_strength instead
        to ensure that only one motor is on at a time."""
-    motor["pwm"].duty_cycle = int((2**16-1)*strength)
+    motor["pwm"].duty_u16(int((2**16-1)*strength))
 
 def set_only_motor_strength(motor, strength):
     """Disables all motors, then sets the motor to a certain strength."""
