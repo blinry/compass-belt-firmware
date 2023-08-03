@@ -11,8 +11,14 @@ import sys
 # Directions are multiples of Tau:
 # 0 is forward, 0.25 is right.
 motors = [
-    {"pin": 0, "direction": 0.25},
-    {"pin": 1, "direction": 0.75},
+    {"pin": 0, "direction": 0},
+    {"pin": 1, "direction": 1/8},
+    {"pin": 2, "direction": 2/8},
+    {"pin": 3, "direction": 3/8},
+    {"pin": 4, "direction": 4/8},
+    {"pin": 5, "direction": 5/8},
+    {"pin": 6, "direction": 6/8},
+    {"pin": 7, "direction": 7/8},
 ]
 
 for motor in motors:
