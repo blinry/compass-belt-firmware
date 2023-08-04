@@ -1,24 +1,15 @@
 from machine import Pin, PWM
-from time import sleep
-import time
-import math
-import sys
-
-#x = input("?")
-#print("Hello", x)
-#exit()
 
 # Directions are multiples of Tau:
 # 0 is forward, 0.25 is right.
 motors = [
-    {"pin": 0, "direction": 0},
-    {"pin": 1, "direction": 1/8},
+    {"pin": 7, "direction": 0/8},
     {"pin": 2, "direction": 2/8},
     {"pin": 3, "direction": 3/8},
-    {"pin": 4, "direction": 4/8},
-    {"pin": 5, "direction": 5/8},
-    {"pin": 6, "direction": 6/8},
-    {"pin": 7, "direction": 7/8},
+    {"pin": 5, "direction": 4/8},
+    {"pin": 0, "direction": 5/8},
+    {"pin": 4, "direction": 6/8},
+    {"pin": 6, "direction": 7/8},
 ]
 
 for motor in motors:
@@ -43,16 +34,6 @@ def disable_all_motors():
         set_motor_strength(motor, 0)
 
 disable_all_motors()
-sleep(1)
-
-loop_duration = 0.01
-#t = 0
-#while True:
-#    strength = (math.sin(t*5)+1)/2
-#    print(strength)
-#    set_motor_strength(strength)
-#    sleep(loop_duration)
-#    t += loop_duration
 
 def find_best_motor(direction):
     """Returns the motor that is best for a given direction."""
@@ -66,7 +47,6 @@ def find_best_motor(direction):
             best_motor = motors[i]
     return best_motor
 
-t = 0
 while True:
     command = input("Enter direction (0-1) or 'stop': ").strip()
     if command == "stop":

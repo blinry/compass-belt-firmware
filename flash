@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -eu -o pipefail
+
+ampy -p /dev/ttyACM0 put firmware.py main.py
